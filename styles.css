@@ -1,17 +1,19 @@
-/* Orbios 3.0 — one screen. Type, space, one slow light.
+/* Orbios 3.0 — one screen, light paper. Type first, one accent, one slow light.
    No frameworks, no web fonts, no build step. */
 
 :root {
-  --ink:      #0a0c0b;
-  --paper:    #ece9e3;
-  --muted:    #8b908a;
-  --hair:     rgba(236, 233, 227, 0.14);
-  --accent:   #dca55f;
+  --paper:      #faf8f4;   /* warm off-white, not sterile #fff */
+  --paper-sunk: #f3efe7;   /* wash under the hero light */
+  --ink:        #14161a;   /* near-black */
+  --muted:      #55595f;   /* AA on paper */
+  --hair:       rgba(20, 22, 26, 0.14);
+  --accent:     #3a3795;   /* one accent — family with the .io action */
+  --accent-soft: rgba(58, 55, 149, 0.07);
 
-  --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Inter, "Helvetica Neue", Arial, sans-serif;
-  --mono: ui-monospace, SFMono-Regular, "Cascadia Mono", Menlo, Consolas, monospace;
+  --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Inter, Roboto,
+          "Helvetica Neue", Arial, sans-serif;
 
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -23,35 +25,35 @@ body {
   min-height: 100svh;
   display: grid;
   place-items: center;
-  padding: clamp(1.5rem, 3.5vh, 3rem) clamp(1.25rem, 5vw, 3rem);
-  background: var(--ink);
-  color: var(--paper);
+  padding: clamp(2rem, 5vh, 4.5rem) clamp(1.25rem, 5vw, 3rem);
+  background: var(--paper);
+  color: var(--ink);
   font-family: var(--sans);
-  font-size: 16px;
+  font-size: clamp(1.125rem, 1.05rem + 0.35vw, 1.25rem);   /* 18 → 20px */
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
 
-/* ---- the one motion: a slow light behind the type ---- */
+/* ---- the one motion: a slow warm light behind the type ---- */
 
 .orb {
   position: fixed;
-  inset: auto auto -30vmin -20vmin;
-  width: 92vmin;
-  height: 92vmin;
+  inset: -25vmin -20vmin auto auto;
+  width: 96vmin;
+  height: 96vmin;
   pointer-events: none;
   z-index: 0;
   background:
     radial-gradient(circle at 50% 50%,
-      rgba(220, 165, 95, 0.20) 0%,
-      rgba(220, 165, 95, 0.09) 34%,
-      rgba(220, 165, 95, 0.00) 68%);
-  animation: breathe 18s ease-in-out infinite alternate;
+      rgba(58, 55, 149, 0.075) 0%,
+      rgba(58, 55, 149, 0.030) 36%,
+      rgba(58, 55, 149, 0.000) 68%);
+  animation: breathe 22s ease-in-out infinite alternate;
 }
 
 @keyframes breathe {
-  from { transform: scale(0.92) translateY(2vmin); opacity: 0.75; }
+  from { transform: scale(0.94) translateY(2vmin); opacity: 0.8; }
   to   { transform: scale(1.08) translateY(-2vmin); opacity: 1; }
 }
 
@@ -60,46 +62,49 @@ body {
 .screen {
   position: relative;
   z-index: 1;
-  width: min(1080px, 100%);
+  width: min(980px, 100%);
   display: flex;
   flex-direction: column;
-  gap: clamp(1.4rem, 3.6vh, 3rem);
+  gap: clamp(2.25rem, 5.5vh, 4rem);
 }
 
-/* ---- head ---- */
+/* ---- head: centered hero, generous air ---- */
+
+.head { text-align: center; }
 
 .eyebrow {
-  margin: 0 0 clamp(0.7rem, 2vh, 1.75rem);
-  font-family: var(--mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.34em;
+  margin: 0 0 clamp(1rem, 2.5vh, 1.75rem);
+  font-size: 0.9375rem;                 /* 15px — never 11px chrome */
+  font-weight: 600;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--accent);
 }
 
 h1 {
   margin: 0;
-  font-size: clamp(2.6rem, min(8.5vw, 9.5vh), 5rem);
-  font-weight: 600;
-  letter-spacing: -0.04em;
-  line-height: 0.98;
+  font-size: clamp(2.75rem, 7.5vw, 4.5rem);
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  line-height: 1.04;
 }
 
 .lede {
-  margin: clamp(0.8rem, 2vh, 1.5rem) 0 0;
-  font-size: clamp(1.1rem, min(2.4vw, 2.9vh), 1.6rem);
-  font-weight: 400;
-  letter-spacing: -0.015em;
-  line-height: 1.35;
-  max-width: 46ch;
+  margin: clamp(1rem, 2.4vh, 1.5rem) auto 0;
+  font-size: clamp(1.375rem, 3.2vw, 1.9rem);
+  font-weight: 450;
+  letter-spacing: -0.012em;
+  line-height: 1.3;
+  max-width: 24ch;
   text-wrap: balance;
 }
 
 .sub {
-  margin: 0.55rem 0 0;
-  font-size: clamp(0.92rem, 1.6vw, 1.02rem);
+  margin: clamp(0.75rem, 1.6vh, 1.1rem) auto 0;
+  font-size: clamp(1.0625rem, 2vw, 1.1875rem);
   color: var(--muted);
   max-width: 42ch;
+  text-wrap: balance;
 }
 
 /* ---- three blocks: hairlines, not cards ---- */
@@ -107,44 +112,46 @@ h1 {
 .three {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: clamp(1.5rem, 4vw, 3rem);
+  gap: clamp(1.75rem, 4vw, 3rem);
   border-top: 1px solid var(--hair);
-  padding-top: clamp(1rem, 2.4vh, 1.75rem);
+  padding-top: clamp(1.5rem, 3vh, 2.25rem);
 }
 
 .three article + article {
   border-left: 1px solid var(--hair);
-  padding-left: clamp(1.5rem, 4vw, 3rem);
+  padding-left: clamp(1.75rem, 4vw, 3rem);
 }
 
 .three h2 {
-  margin: 0 0 0.6rem;
-  font-family: var(--mono);
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.22em;
+  margin: 0 0 0.75rem;
+  font-size: 0.9375rem;
+  font-weight: 650;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--accent);
 }
 
 .three p {
   margin: 0;
-  font-size: clamp(0.9rem, 1.5vw, 1rem);
-  color: var(--paper);
-  max-width: 32ch;
+  font-size: clamp(1.0625rem, 1.7vw, 1.125rem);
+  line-height: 1.5;
+  color: var(--ink);
+  max-width: 34ch;
 }
 
-.three strong { font-weight: 600; }
+.three strong { font-weight: 650; }
 
-/* ---- doors ---- */
+/* ---- doors: the product. Big labels, hairline rows, one solid action chip ---- */
 
 .ask {
-  margin: 0 0 clamp(0.6rem, 1.6vh, 1.1rem);
-  font-size: clamp(0.98rem, min(1.9vw, 2.2vh), 1.15rem);
+  margin: 0 0 clamp(0.5rem, 1.4vh, 1rem);
+  font-size: clamp(1.125rem, 2.2vw, 1.3125rem);
+  font-weight: 550;
   letter-spacing: -0.01em;
 }
 
 .doors ol {
+  --door-pad: clamp(0.5rem, 1.5vw, 1rem);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -153,107 +160,124 @@ h1 {
 
 .doors li { border-bottom: 1px solid var(--hair); }
 
-.doors a {
+.doors li a {           /* rows only — the mailnote link lives in this section too */
   display: flex;
-  align-items: baseline;
-  gap: clamp(0.9rem, 2.5vw, 1.6rem);
-  padding: clamp(0.55rem, 1.3vh, 0.9rem) 0;
-  color: var(--paper);
+  align-items: center;
+  gap: clamp(1rem, 2.5vw, 1.6rem);
+  padding: clamp(0.95rem, 2.2vh, 1.35rem) var(--door-pad);
+  margin-inline: calc(-1 * var(--door-pad));
+  border-radius: 14px;
+  color: var(--ink);
   text-decoration: none;
-  transition: color 220ms ease;
+  transition: background-color 220ms ease;
 }
 
 .doors .idx {
-  font-family: var(--mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
-  color: var(--muted);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--accent);
   font-variant-numeric: tabular-nums;
-  transition: color 220ms ease;
 }
 
 .doors .label {
   flex: 1;
-  font-size: clamp(1rem, min(2.2vw, 2.4vh), 1.3rem);
-  line-height: 1.4;
+  font-size: clamp(1.5rem, 4.5vw, 2rem);
+  font-weight: 550;
+  line-height: 1.25;
   letter-spacing: -0.02em;
   background-image: linear-gradient(var(--accent), var(--accent));
   background-repeat: no-repeat;
   background-position: 0 100%;
-  background-size: 0% 1px;
-  transition: background-size 320ms cubic-bezier(0.22, 0.61, 0.36, 1);
-  padding-bottom: 2px;
+  background-size: 0% 2px;
+  transition: background-size 340ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  padding-bottom: 3px;
 }
 
 .doors .arrow {
-  font-size: 1rem;
-  color: var(--muted);
-  transition: transform 320ms cubic-bezier(0.22, 0.61, 0.36, 1), color 220ms ease;
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  font-size: 1.125rem;
+  line-height: 1;
+  color: var(--accent);
+  transition: background-color 240ms ease, color 240ms ease,
+              transform 340ms cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-.doors a:hover .label,
-.doors a:focus-visible .label { background-size: 100% 1px; }
+.doors li a:hover,
+.doors li a:focus-visible { background-color: var(--accent-soft); }
 
-.doors a:hover .idx,
-.doors a:hover .arrow,
-.doors a:focus-visible .idx,
-.doors a:focus-visible .arrow { color: var(--accent); }
+.doors li a:hover .label,
+.doors li a:focus-visible .label { background-size: 100% 2px; }
 
-.doors a:hover .arrow,
-.doors a:focus-visible .arrow { transform: translateX(0.35rem); }
+.doors li a:hover .arrow,
+.doors li a:focus-visible .arrow {
+  background-color: var(--accent);
+  color: var(--paper);
+  transform: translateX(0.35rem);
+}
 
 .mailnote {
-  margin: clamp(0.7rem, 1.6vh, 1.1rem) 0 0;
-  font-family: var(--mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.04em;
+  margin: clamp(1rem, 2.2vh, 1.5rem) 0 0;
+  font-size: 1rem;
+  line-height: 1.55;
   color: var(--muted);
+  max-width: 56ch;
 }
 
-.mailnote a { color: var(--paper); text-decoration: none; border-bottom: 1px solid var(--hair); }
+.mailnote a {
+  color: var(--accent);
+  font-weight: 550;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(58, 55, 149, 0.35);
+}
+
 .mailnote a:hover { border-bottom-color: var(--accent); }
 
 /* ---- foot ---- */
 
 .foot {
   border-top: 1px solid var(--hair);
-  padding-top: clamp(0.9rem, 2vh, 1.25rem);
+  padding-top: clamp(1.1rem, 2.4vh, 1.5rem);
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
   justify-content: space-between;
-  gap: 0.75rem 1.5rem;
+  gap: 0.9rem 1.5rem;
 }
 
-.foot nav { display: flex; flex-wrap: wrap; gap: clamp(1.25rem, 4vw, 2.5rem); }
+.foot nav { display: flex; flex-wrap: wrap; gap: clamp(1.5rem, 4vw, 2.5rem); }
 
 .foot nav a {
-  font-family: var(--mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--muted);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink);
   text-decoration: none;
-  transition: color 220ms ease;
+  transition: color 200ms ease;
 }
 
-.foot nav a span { color: var(--paper); }
-.foot nav a:hover { color: var(--accent); }
+.foot nav a span { font-weight: 450; color: var(--muted); }
+.foot nav a:hover,
 .foot nav a:hover span { color: var(--accent); }
 
 .fine {
   margin: 0;
-  font-size: 0.72rem;
+  font-size: 0.9375rem;
   line-height: 1.5;
   color: var(--muted);
-  max-width: 44ch;
+  max-width: 46ch;
 }
 
 /* ---- focus ---- */
 
 a:focus-visible {
-  outline: 1px solid var(--accent);
-  outline-offset: 6px;
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
 }
 
 /* ---- entrance: staggered, once, cheap ---- */
@@ -277,14 +301,16 @@ a:focus-visible {
 @media (max-width: 720px) {
   body { place-items: start; }
 
+  .head { text-align: left; }
+  .lede { margin-inline: 0; max-width: none; }
+  .sub  { margin-inline: 0; }
+
   .three {
     grid-template-columns: 1fr;
     gap: 0;
   }
 
-  .three article {
-    padding: clamp(0.9rem, 3vw, 1.25rem) 0;
-  }
+  .three article { padding: clamp(1rem, 3.5vw, 1.4rem) 0; }
 
   .three article + article {
     border-left: 0;
@@ -293,6 +319,8 @@ a:focus-visible {
   }
 
   .three p { max-width: none; }
+
+  .doors .arrow { width: 2.5rem; height: 2.5rem; }
 
   .foot { flex-direction: column; align-items: flex-start; }
 }
