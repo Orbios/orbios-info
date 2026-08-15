@@ -9,7 +9,7 @@ One screen. Static. No build step, no framework, no CMS, no tracking.
 | Domain | `orbios.info` (registrar TODO — Founder) |
 | Host | Vercel, static, Production branch `main` |
 | Live | https://orbios.info |
-| Doors | `mailto:contact@orbios.io` with the door in the subject |
+| Doors | Apply: ops / dev / market — `mailto:contact@orbios.io` with the seat in the subject |
 | Links out | Camp https://www.orbios.org · Agency https://orbios.io |
 
 ## Run
