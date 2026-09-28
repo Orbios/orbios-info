@@ -9,8 +9,8 @@ One page. Static. No build step, no framework, no CMS, no tracking.
 | Domain | `orbios.info` (Namecheap) |
 | Host | Vercel, static, Production branch `main` |
 | Live | https://orbios.info |
-| Client door | Hero → deliverables → 5 badges → talent showcase. Book / pre-order opens a `<dialog>` that drafts a `mailto:contact@orbios.io` (plain `mailto` links without JS) |
-| Intern door | 5-day intensive + apply form (5 tracks) → `mailto:contact@orbios.io` with the track in the subject |
+| Client door | Hero + 4-asset fact grid + unit economics → 5 badges (tabs: pick a badge, see its 5-day scope, book / pre-order or join the track) → talent showcase. Book / pre-order opens a `<dialog>` that drafts a `mailto:contact@orbios.io` (plain `mailto` links without JS); Telegram fallback `@lika_orbios` |
+| Intern door | 5-day intensive + apply form (5 tracks) → `mailto:contact@orbios.io` with the track in the subject. "Join track" links in the badge panels preselect the track |
 | Links out | Camp https://www.orbios.org · Agency https://orbios.io |
 | UI | Dark `#080c14`. Accents: emerald `#10b981` (primary), cyan `#38bdf8`, amber `#fbbf24`; badge colours violet `#a78bfa` (Thai Ops), rose `#f472b6` (Personal). Plus Jakarta Sans + JetBrains Mono |
 
